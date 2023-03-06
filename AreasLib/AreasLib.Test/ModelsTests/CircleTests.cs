@@ -13,14 +13,14 @@ namespace AreasLib.Test.ModelsTests
     {
         [Theory]
         [InlineData(0, 0)]
-        [InlineData(2, 4*Math.PI)]
-        [InlineData(3.5, 12.25*Math.PI)]
+        [InlineData(2, 4 * Math.PI)]
+        [InlineData(3.5, 12.25 * Math.PI)]
         public void GetArea_OnInvoke_ReturnValidResult(double R, double result)
         {
             //-------
-            Circle target = new Circle(R);
+            Circle target = new Circle();
             //-------
-            var _res = target.GetArea();
+            var _res = target.GetArea(R);
             //-------
             _res.Should().Be(result);
         }
@@ -28,7 +28,10 @@ namespace AreasLib.Test.ModelsTests
         [Fact]
         public void CircleCtor_OnNegativeRadius_ThrowException()
         {
-            Assert.ThrowsAny<Exception>(() => new Circle(-1));
+            //-------
+            Circle target = new Circle();
+            //------
+            Assert.ThrowsAny<Exception>(() => target.GetArea(-1));
         }
     }
 }
