@@ -1,4 +1,5 @@
-﻿using AreasLib.Models.IModels;
+﻿using AreasLib.Actions.IActions;
+using AreasLib.Models.IModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,21 +10,18 @@ namespace AreasLib.Models
 {
     public class Circle : IFigure
     {
-        /*        public double R;
-                public Circle(double R)
-                {
-                    if (R < 0)
-                    {
-                        throw new Exception();
-                    }
-                    this.R = R;
-                }
-        */
-        public double GetArea(params double[] p)
+        IConsoleCommunication _consoleCommunic;
+        public Circle(IConsoleCommunication consoleCommunic)
         {
-            /*            return Math.PI * Math.Pow(R, 2);
-            */
-            return 0;
+            _consoleCommunic = consoleCommunic;
+        }
+        public double? GetArea()
+        {
+            double? radius = _consoleCommunic.GetSomeDoubleValueFromUser("Введите радиус");
+            if (radius == null)
+                return null;
+
+            return Math.PI * Math.Pow((double)radius, 2);
         }
     }
 }

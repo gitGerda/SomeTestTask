@@ -18,11 +18,22 @@ namespace AreasLib.Actions
         {
             _consoleCommunic = consoleCommunic;
         }
-        public double GetAreaOfSomeFigure()
+        public double? GetAreaOfSomeFigure(IFigure figure)
         {
-            Console.WriteLine();
-            var radius = _consoleCommunic.GetSomeDoubleValueFromUser("Введите радиус");
-            return 0;
+            if (figure is Circle)
+            {
+                var _circle = new Circle(_consoleCommunic);
+                return _circle.GetArea();
+            }
+            else if (figure is Triangle)
+            {
+                var _triangle = new Triangle(_consoleCommunic);
+                return _triangle.GetArea();
+            }
+            else
+            {
+                throw new Exception("Error: Unsupported figure");
+            }
         }
 
     }

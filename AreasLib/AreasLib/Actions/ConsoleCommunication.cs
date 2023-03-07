@@ -12,9 +12,9 @@ namespace AreasLib.Actions
     public class ConsoleCommunication : IConsoleCommunication
     {
         IActionsHelpers _helpers;
-        public ConsoleCommunication()
+        public ConsoleCommunication(IActionsHelpers helpers)
         {
-            _helpers = new ActionsHelpers();
+            _helpers = helpers;
         }
         public double? GetSomeDoubleValueFromUser(string messageToUser)
         {
@@ -32,6 +32,11 @@ namespace AreasLib.Actions
                     }
 
                     var result = Convert.ToDouble(response);
+                    if (result < 0)
+                    {
+                        throw new Exception();
+                    }
+
                     return result;
                 }
                 catch

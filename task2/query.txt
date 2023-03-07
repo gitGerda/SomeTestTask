@@ -1,0 +1,17 @@
+"Product" table:
+---------------------------
+prod_id		 
+prod_name	
+--------------------------
+
+"Category" table:
+--------------------------
+cat_id
+prod_id
+cat_name
+--------------------------
+
+
+Query:
+	select Product.prod_name as "Product", Category.cat_name as "Category"
+	from Product LEFT JOIN Category on Product.prod_id = Category.prod_id

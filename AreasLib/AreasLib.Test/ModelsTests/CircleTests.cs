@@ -1,4 +1,5 @@
-﻿using AreasLib.Models;
+﻿using AreasLib.Actions.IActions;
+using AreasLib.Models;
 using FluentAssertions;
 using System;
 using System.Collections.Generic;
@@ -18,20 +19,26 @@ namespace AreasLib.Test.ModelsTests
         public void GetArea_OnInvoke_ReturnValidResult(double R, double result)
         {
             //-------
-            Circle target = new Circle();
+            var _consoleCommunicMock = new Mock<IConsoleCommunication>();
+            _consoleCommunicMock.Setup(t => t.GetSomeDoubleValueFromUser("Введите радиус")).Returns(R);
+            Circle target = new Circle(_consoleCommunicMock.Object);
             //-------
-            var _res = target.GetArea(R);
+            var _res = target.GetArea();
             //-------
             _res.Should().Be(result);
         }
-
         [Fact]
-        public void CircleCtor_OnNegativeRadius_ThrowException()
+        public void GetArea_OnNullRadius_ReturnNull()
         {
             //-------
-            Circle target = new Circle();
-            //------
-            Assert.ThrowsAny<Exception>(() => target.GetArea(-1));
+            var _consoleCommunicMock = new Mock<IConsoleCommunication>();
+            _consoleCommunicMock.Setup(t => t.GetSomeDoubleValueFromUser("Введите радиус")).Returns(() => null);
+            Circle target = new Circle(_consoleCommunicMock.Object);
+            //-------
+            var _res = target.GetArea();
+            //-------
+            _res.Should().Be(null);
         }
+
     }
 }

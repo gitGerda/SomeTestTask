@@ -14,8 +14,7 @@ namespace AreasLib.Models.IModels
         /// <summary>
         /// Функция вычисления площади
         /// </summary>
-        /// <param name="p"> Параметры, необходимые для вычисления площади фигуры </param>
         /// <returns></returns>
-        double GetArea(params double[] p);
+        double? GetArea();
     }
 }
